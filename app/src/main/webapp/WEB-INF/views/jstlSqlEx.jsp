@@ -12,6 +12,7 @@
     <title>&lt;sql:dateParam&gt; Demo</title>
   </head>
   <body>
+  	<!-- http://www.codejava.net/java-ee/jstl/jstl-sql-tag-dateparam -->
     <h1>&lt;sql:dateParam&gt; Demo</h1>
     <form name="citizenDOBForm"
     action="${pageContext.request.contextPath}/demo2.jsp"

@@ -1,0 +1,107 @@
+package com.testpad;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+public enum EnumFld1 {
+
+	FLD1("FLD1", "col1, col2, col3, col4", "1, 2, 3, 4", "1, 1, 1, 1"),
+	FLD2("FLD2", "col1, col2, col3, col4", "1, 2, 3, 4", "1, 1, 1, 1"),
+	FLD3("FLD3", "col1, col2, col3, col4", "1, 2, 3, 4", "1, 1, 1, 1"),
+	FLD4("FLD4", "col1, col2, col3, col4", "1, 2, 3, 4", "1, 1, 1, 1");
+	
+	private String name;
+	private String col;
+	private String pos;
+	private String len;
+	
+	List<String> colLst = null;
+	List<String> posLst = null;
+	List<String> lenLst = null;
+
+	EnumFld1(String name, String col, String pos, String len) {
+		this.name = name;
+		this.col = col;
+		this.pos = pos;
+		this.len = len;
+		
+		String [] colAry = this.getCol().split(",");
+		System.out.println("colAry size: " + colAry.length);
+		String [] posAry = this.getPos().split(",");
+		String [] lenAry = this.getLen().split(",");
+		
+		if (colAry.length != posAry.length || colAry.length != lenAry.length || posAry.length != lenAry.length) {
+			//throw new Exception("Cols do not match Pos or Lens");
+		}
+		
+		colLst = Arrays.asList(colAry);
+		System.out.println("colLst size: " + colLst.size());
+		
+		posLst = new ArrayList<String>(Arrays.asList(posAry));
+		System.out.println("posLst size: " + posLst.size());
+		
+		lenLst = new ArrayList<String>(Arrays.asList(lenAry));
+		System.out.println("lenLst size: " + lenLst.size());
+		
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public String getCol() {
+		return col;
+	}
+
+	public String getPos() {
+		return pos;
+	}
+
+	public String getLen() {
+		return len;
+	}
+	
+	public List<String> getColLst() {
+		return this.colLst;
+	}
+	
+	public int getSupColCount() {
+		return this.colLst.size();
+	}
+	
+	public String getSupColAt(int colIdx) {
+		return this.colLst.get(colIdx);
+	}
+	
+	public int getColPos(String col) {
+		int colIdx = colLst.indexOf(col);
+		String colPos = lenLst.get(colIdx);
+		
+		if (colPos == null) {
+			return -1;
+		}
+		
+		return Integer.parseInt(colPos);
+	}
+	
+	public int getColLen(String col) {
+		int colIdx = colLst.indexOf(col);
+		String colLen = posLst.get(colIdx);
+		
+		if (colLen == null) {
+			return -1;
+		}
+		
+		return Integer.parseInt(colLen);
+	}
+	
+	public static void main(String[] args) {
+		EnumFld1 demoEnum = EnumFld1.FLD1;
+		
+		System.out.println("ColLst : " + demoEnum.getColLst());
+		System.out.println("ColAt : " + demoEnum.getSupColAt(2));
+		System.out.println("ColPos : " + demoEnum.getColPos("col3"));
+		System.out.println("ColLen : " + demoEnum.getColLen("col3"));
+	}
+}

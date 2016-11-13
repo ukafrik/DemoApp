@@ -11,8 +11,8 @@ import com.itextpdf.text.pdf.PdfStamper;
 
 public class PDFModifyExample { 
 	public static void main(String args[]){ 
-		int xloc = 300;
-		int yloc = 650;
+		int xloc = 0;
+		int yloc = 20;
 
 		try { 
 			//Create PdfReader instance. 
@@ -33,6 +33,10 @@ public class PDFModifyExample {
 				pageContentByte.setTextMatrix(xloc, yloc);   
 				//Write text 
 				pageContentByte.showText(xloc + ":" + yloc + "-Happy Sunday"); 
+				
+				pageContentByte.setFontAndSize(baseFont, 16); 
+				pageContentByte.setTextMatrix(xloc, yloc+10);   
+				pageContentByte.showText(xloc + ":" + (yloc+10) + "-New Sunday"); 
 				pageContentByte.endText(); 
 			}   
 			//Close the pdfStamper. 
